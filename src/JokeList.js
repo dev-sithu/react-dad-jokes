@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import axios from 'axios';
+import Joke from "./Joke";
 
 const API_URL = 'https://icanhazdadjoke.com';
 
@@ -38,7 +39,7 @@ class JokeList extends Component {
         <div className="JokeList-jokes">
           {
             this.state.jokes.map(j => (
-              <div key={j.id}>{j.joke}</div>
+              <Joke id={j.id} joke={j.joke} />
             ))
           }
         </div>

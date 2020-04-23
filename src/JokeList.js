@@ -26,11 +26,20 @@ class JokeList extends Component {
 
       jokes.push({
         id: response.data.id,
-        joke: response.data.joke,
+        text: response.data.joke,
+        votes: 0
       });
     }
 
     this.setState({ jokes });
+  }
+
+  handleVote(id, delta) {
+    this.setState(st => ({
+      jokes: st.jokes.map(j =>
+        j.id === id ? { ...j, votes: j.votes + delta } : j
+      )
+    }));
   }
 
   render() {
@@ -46,7 +55,13 @@ class JokeList extends Component {
         <div className="JokeList-jokes">
           {
             this.state.jokes.map(j => (
-              <Joke key={j.id} id={j.id} joke={j.joke} />
+              <Joke
+                key={j.id}
+                votes={j.votes}
+                text={j.text}
+                upvote={() => this.handleVote(j.id, 1)}
+                downvote={() => this.handleVote(j.id, -1)}
+              />
             ))
           }
         </div>

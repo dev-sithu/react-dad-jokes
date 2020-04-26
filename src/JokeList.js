@@ -18,6 +18,7 @@ class JokeList extends Component {
       loading: false
     };
 
+    this.seenJokes = new Set(this.state.jokes.map(j => j.id));
     this.handleClick = this.handleClick.bind(this);
   }
 
@@ -41,11 +42,15 @@ class JokeList extends Component {
         headers: { Accept: 'application/json' }
       });
 
-      jokes.push({
-        id: response.data.id,
-        text: response.data.joke,
-        votes: 0
-      });
+      const { id, joke: text } = response.data;
+
+      if (!this.seenJokes.has(id)) {
+        jokes.push({ id, text, votes: 0 });
+        this.seenJokes.add(id);
+      } else {
+        console.log('FOUND A DUPLICATE!');
+        console.log(id, text);
+      }
     }
 
     this.setState(

@@ -1,4 +1,6 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Dad Jokes
+
+A React app that lets people view an vote on cheesy jokes. To generate jokes, it uses [ICanHazDadJoke.com](https://icanhazdadjoke.com/) API. This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
 
